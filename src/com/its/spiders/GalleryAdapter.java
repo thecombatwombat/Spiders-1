@@ -49,9 +49,10 @@ public class GalleryAdapter extends ArrayAdapter<GalleryListItem>{
         }
         
         item = data.elementAt(position);
-        Bitmap photo = BitmapFactory.decodeFile(item.filePhoto.getAbsolutePath());
-        holder.imageView.setImageBitmap(photo);
-        
+        //String filePath = item.filePath;
+        //Bitmap photo = BitmapFactory.decodeFile(item.filePath);
+        holder.imageView.setImageBitmap(Utils.decodeSampledBitmapFromFilePath(item.filePath, 400, 400));
+                
         return row;
 	}
 	

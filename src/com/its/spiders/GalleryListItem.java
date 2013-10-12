@@ -6,11 +6,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 public class GalleryListItem {
-	public File filePhoto;
+	//public File filePhoto;
+	public String filePath;
 	
 	public GalleryListItem() {}
 	
-	public GalleryListItem(File filePhoto) {
-		this.filePhoto = filePhoto;
+	public GalleryListItem(String filePath) {
+		this.filePath = filePath;
 	}
 }

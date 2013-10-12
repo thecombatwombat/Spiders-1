@@ -21,14 +21,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.its.utils.Utils;
 
 public class TagActivity extends Activity {
 	
@@ -40,6 +44,7 @@ public class TagActivity extends Activity {
 	private static int PIC_REQUEST;
 	private Context CTX;
 	public static final int MEDIA_TYPE_IMAGE = 1;
+	private ImageView iv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,7 @@ public class TagActivity extends Activity {
 		
 		Button btnCamera = (Button) findViewById(R.id.btn_camera);
 		ListView llGallery = (ListView) findViewById(R.id.lv_photos);
+		iv = (ImageView) findViewById(R.id.imageView1);
 		
 		llGallery.setAdapter(ADAPTER);
 		
@@ -59,7 +65,7 @@ public class TagActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				PIC_REQUEST = (int)System.currentTimeMillis()/1000;
+				PIC_REQUEST = (int) System.currentTimeMillis();
 				// create Intent to take a picture and return control to the calling application
 			    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 			    
@@ -94,7 +100,8 @@ public class TagActivity extends Activity {
 	        if (resultCode == RESULT_OK) {
 	        	File dir = new File(Environment.getExternalStorageDirectory(), "Spiders");
 			    File reimage = new File(dir.getPath() + File.separator + PIC_REQUEST + ".jpg");
-	        	GalleryListItem item = new GalleryListItem(reimage);
+	        	
+			    GalleryListItem item = new GalleryListItem(reimage.getPath());
 	        	MLIST.add(item);
 	        	ADAPTER.notifyDataSetChanged();
 	        }else if (resultCode == RESULT_CANCELED) {
